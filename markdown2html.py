@@ -7,7 +7,9 @@ import os
 if __name__ == "__main__":
     # Check the number of arguments
     if len(sys.argv) < 3:
-        print("Usage: ./markdown2html.py README.md README.html", file=sys.stderr)
+        print(
+            "Usage: ./markdown2html.py README.md README.html", file=sys.stderr
+        )
         sys.exit(1)
 
     # Get the input and output file names
@@ -28,7 +30,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     # Convert Markdown content to HTML (basic conversion)
-    html_content = markdown_content.replace('\n', '<br>\n')  # Simple placeholder for real Markdown-to-HTML conversion
+    html_content = markdown_content.replace('\n', '<br>\n')
 
     # Write the HTML content to the output file
     try:
