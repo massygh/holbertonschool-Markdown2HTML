@@ -1,29 +1,42 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+"""A script to convert a Markdown file to HTML."""
+
 import sys
 import os
 
-
-def main():
-    # Vérification du nombre d'arguments
+if __name__ == "__main__":
+    # Check the number of arguments
     if len(sys.argv) < 3:
-        print(
-            "Usage: ./markdown2html.py README.md README.html",
-            file=sys.stderr
-        )
+        print("Usage: ./markdown2html.py README.md README.html", file=sys.stderr)
         sys.exit(1)
 
-    # Récupération des noms de fichiers
+    # Get the input and output file names
     markdown_file = sys.argv[1]
     html_file = sys.argv[2]
 
-    # Vérification de l'existence du fichier Markdown
+    # Check if the Markdown file exists
     if not os.path.isfile(markdown_file):
         print(f"Missing {markdown_file}", file=sys.stderr)
         sys.exit(1)
 
-    # Si tout est correct, aucune sortie supplémentaire et succès
+    # Read the Markdown file
+    try:
+        with open(markdown_file, 'r') as md_file:
+            markdown_content = md_file.read()
+    except Exception as e:
+        print(f"Error reading {markdown_file}: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    # Convert Markdown content to HTML (basic conversion)
+    html_content = markdown_content.replace('\n', '<br>\n')  # Simple placeholder for real Markdown-to-HTML conversion
+
+    # Write the HTML content to the output file
+    try:
+        with open(html_file, 'w') as html_output:
+            html_output.write(html_content)
+    except Exception as e:
+        print(f"Error writing to {html_file}: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    # Exit with success
     sys.exit(0)
-
-
-if __name__ == "__main__":
-    main()
